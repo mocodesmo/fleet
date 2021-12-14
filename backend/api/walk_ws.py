@@ -146,21 +146,6 @@ async def redis_connector(websocket: WebSocket):
 
 async def walk_ws(websocket: WebSocket):
     try:
-        auth = websocket.headers.get('Auth')
-        fid, err = auth_direct(auth)
-        if err is not None:
-            print('error on verify', err.message)
-            await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
-            return
-
-        user, err = find_user(fid)
-        if err is not None:
-            print('error on find', err.message)
-            await websocket.close(status.WS_1008_POLICY_VIOLATION)
-            return
-
-        websocket.scope.update({'user_id': str(user.pk)})
-
         await websocket.accept()
         print('---- WS CONNECTED ----')
         await redis_connector(websocket)

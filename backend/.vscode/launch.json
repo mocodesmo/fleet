@@ -1,0 +1,59 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload"
+            ],
+            "jinja": true,
+            // "autoReload": true,
+            // "autoReload": true,
+        },
+        //{
+        //    "name": "Python: Flask",
+        //    "type": "python",
+        //    "request": "launch",
+        //    "module": "flask",
+        //    "env": {
+        //        "FLASK_APP": "main.py",
+        //        "FLASK_ENV": "development",
+        //        "FLASK_DEBUG": "0",
+        //        "GEVENT_SUPPORT": "True"
+        //    },
+        //    "args": [
+        //        "run",
+        //        "--no-debugger"
+        //    ],
+        //    "jinja": true
+        //},
+        //{
+        //    "name": "Flask app",
+        //    "type": "python",
+        //    "request": "launch",
+        //    "module": "flask",
+        //    "args": [
+        //        "run"
+        //        //"main:app"
+        //    ],
+        //    "env": {
+        //        "FLASK_APP": "main.py",
+        //        "FLASK_ENV": "development",
+        //        "FLASK_DEBUG": "0"
+        //    },
+        //    "jinja": true
+        //}
+    ]
+}

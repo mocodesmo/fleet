@@ -35,7 +35,6 @@
 //   // this is the key object - the PolylinePoints
 //   // which generates every polyline between start and finish
 //   PolylinePoints polylinePoints = PolylinePoints();
-//   String googleAPIKey = 'AIzaSyA3mn52RmFI9YJkebueMUNRMlmL3XWAyjg';
 //   // for my custom icons
 //   late BitmapDescriptor sourceIcon;
 //   late BitmapDescriptor destinationIcon;

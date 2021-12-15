@@ -37,6 +37,12 @@ class MsgDetails(BaseModel):
         arbitrary_types_allowed = True
 
 
+async def broadcast(r: Redis, payload: str):
+    channels = await r.pubsub_channels()
+    for channel in channels:
+        await r.publish(channel, payload)
+
+
 async def receiver(ws: WebSocket, r: Redis):
     try:
         while True:
@@ -77,7 +83,7 @@ async def receiver(ws: WebSocket, r: Redis):
                     'event': MsgType.start_walk,
                     # 'time': msg.time
                 })
-                await r.publish(from_user, payload)
+                await broadcast(r, payload)
 
             if(msg.event == MsgType.end_walk):
                 err = end_walk(from_user, msg.time)
@@ -90,7 +96,7 @@ async def receiver(ws: WebSocket, r: Redis):
                     'event': MsgType.end_walk,
                     # 'time': msg.time
                 })
-                await r.publish(from_user, payload)
+                await broadcast(r, payload)
 
             if(msg.event == MsgType.update_location):
                 # print(data['time'])
@@ -105,7 +111,7 @@ async def receiver(ws: WebSocket, r: Redis):
                     'event': MsgType.update_location,
                     'walk': walk.to_json(),
                 })
-                await r.publish(from_user, payload)
+                await broadcast(r, payload)
 
     except WebSocketDisconnect as err:
         print(err)
